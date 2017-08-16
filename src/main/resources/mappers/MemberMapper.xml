@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.persistence.MemberDao" >
+
+	<sql id="whereSql">
+		<where>userid = #{userid}</where>
+	</sql>
+
+	<select id="getTime" resultType="string">
+		select now()
+	</select>
+	
+	<insert id="insertMember">
+		INSERT INTO tbl_member
+			(userid, userpw, username, email)
+		VALUES(#{userid}, #{userpw}, #{username}, #{email})
+	</insert>
+	
+	<select id="readMember" resultType="MemberVO">
+		select * from tbl_member <include refid="whereSql"/>
+	</select>
+		
+	<select id="login" resultType="MemberVO">
+		select * from tbl_member 
+		<include refid="whereSql"/> 
+		and userpw = #{userpw}
+	</select>
+	
+	<update id="updateMember">
+		UPDATE tbl_member
+		SET userpw= #{userpw}, username= #{username}, email=#{email}
+		<include refid="whereSql"/>
+	</update>
+
+	<delete id="deleteMember">
+		DELETE FROM  tbl_member
+		<include refid="whereSql"/>
+	</delete>	
+
+
+
+	
+</mapper>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="handlebars-v4.0.10.js"></script>
+</head>
+<body>
+		<table id="replies" border="1">
+			<tr>
+				<th>이름</th>
+				<th>아이디</th>
+				<th>메일주소</th>
+			</tr>
+		</table>
+		
+	 <script id="temp" type="text/x-handlebars-template">
+		{{#list}} 
+			<tr>
+				<td>{{name}}</td>
+				<td>{{userid}}</td>
+				<td>{{email}}</td>
+				
+			</tr>
+		{{/list}}
+	</script>
+	
+	<script>
+		
+		var source = $("#temp").html();
+		var template = Handlebars.compile(source);
+		var data = {list:[
+			{name:"홍길동1", userid:"aaa1", email: "aaa1@gmail.com"},
+			{name:"홍길동2", userid:"aaa2", email: "aaa2@gmail.com"},
+			{name:"홍길동3", userid:"aaa3", email: "aaa3@gmail.com"},
+			{name:"홍길동4", userid:"aaa4", email: "aaa4@gmail.com"},
+			{name:"홍길동5", userid:"aaa5", email: "aaa5@gmail.com"}
+			]};
+			
+		$("#replies").append(template(data));
+	</script>
+		
+</body>
+</html>
